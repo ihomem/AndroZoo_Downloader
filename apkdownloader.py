@@ -97,7 +97,8 @@ class ApkDownloader(object):
             self.logger.debug("Header Row: {}".format(self.row_zero_header))
             vt_detection_idx = self.row_zero_header.index('vt_detection')
             self.logger.debug("vt_detection INDEX: {}".format(vt_detection_idx))
-            for idx, row in enumerate(islice(reader, 10)):
+            #for idx, row in enumerate(islice(reader, 10)):
+            for idx, row in enumerate(islice(reader, 100)):
                 if mal_state == 'malicious':
                     if int(row[vt_detection_idx]) > 0:
                         apk_filenames.append(row[0])
