@@ -178,3 +178,8 @@ wheels/
 # Rope project settings
 /config/
 /downloads/
+/.idea/vcs.xml
+/.idea/misc.xml
+/.idea/AndroZoo_Downloader.iml
+/.idea/modules.xml
+/.idea/encodings.xml
