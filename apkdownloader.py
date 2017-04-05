@@ -29,7 +29,7 @@ class ApkDownloader(object):
         self.apk_store_path = self.config_file['config']['remote']['apk_path']
         self.API_key =  self.config_file['config']['remote']['api_key']
 
-        self.APK_filename_list = self.get_all_apk_filenames_from_source('None')
+        self.APK_filename_list = self.get_all_apk_filenames_from_source('All')
 
     def read_config_file(self, configPath):
         self.logger.debug("Config Path: %s" % str(configPath))
