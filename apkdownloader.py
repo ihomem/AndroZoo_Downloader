@@ -79,7 +79,7 @@ class ApkDownloader(object):
         #return apk
             return success
 
-    def get_all_apk_filenames_from_source(self, mal_state='None'):
+    def get_all_apk_filenames_from_source(self, mal_state='All'):
         url = self.apk_list_path
         self.logger.debug("Current APK Source: {}".format(url))
         apk_filenames = []
@@ -97,8 +97,8 @@ class ApkDownloader(object):
             self.logger.debug("Header Row: {}".format(self.row_zero_header))
             vt_detection_idx = self.row_zero_header.index('vt_detection')
             self.logger.debug("vt_detection INDEX: {}".format(vt_detection_idx))
-            #for idx, row in enumerate(islice(reader, 10)):
-            for idx, row in enumerate(islice(reader, 100)):
+            for idx, row in enumerate(islice(reader, 10)):
+            #for idx, row in enumerate(islice(reader, 100)):
                 if mal_state == 'malicious':
                     if int(row[vt_detection_idx]) > 0:
                         apk_filenames.append(row[0])
@@ -111,7 +111,7 @@ class ApkDownloader(object):
                         self.logger.debug('APK SHA256 (name): {}'.format(row[0]))
                         # print("SHA256: {}".format(row[0]))
                         # print(row)
-                elif mal_state == 'None':
+                elif mal_state == 'All':
                     apk_filenames.append(row[0])
                     self.logger.debug('APK SHA256 [{}] (name): {}'.format(len(apk_filenames),row[0]))
 
