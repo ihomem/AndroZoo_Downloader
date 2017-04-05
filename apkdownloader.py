@@ -40,7 +40,7 @@ class ApkDownloader(object):
             # return str(data['config'][apk_path_type]['apk_path'])
             return data
 
-    def download_apk(self, file_name):
+    def download_apk(self, file_name, mal_type=''):
         success = False
         #self.logger.debug('Getting APK from REMOTE path: {}'.format(self.apk_store_path_type))
         self.logger.debug('Getting APK from REMOTE path: {}'.format(self.apk_store_path))
@@ -51,7 +51,15 @@ class ApkDownloader(object):
         self.logger.debug('Response Code: \n {}:{}'.format(resp.status_code, resp.reason))
         # self.logger.debug('Response: \n {}'.format(resp.text))
         extension = '.apk'
-        downloads_filepath = os.path.join('downloads', file_name + extension)
+        sub_dir = mal_type
+        if sub_dir != '':
+            if os.path.exists(os.path.join('downloads', sub_dir)):
+                self.logger.debug('Sub-dir [{}] exists.'.format(sub_dir))
+            else:
+                os.mkdir(os.path.join('downloads', sub_dir))
+                self.logger.debug('Created Sub-dir: [{}]'.format(sub_dir))
+
+        downloads_filepath = os.path.join('downloads', sub_dir, file_name + extension)
         if resp.ok:
             total_size = int(resp.headers.get('content-length'))
             self.logger.info('File Length: {}'.format(total_size))
